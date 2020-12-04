@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zcy.dao.AppDeHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.zcy.entity.AppDeHistory">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="c_article_id" jdbcType="VARCHAR" property="cArticleId" />
+    <result column="c_user_id" jdbcType="VARCHAR" property="cUserId" />
+    <result column="c_title" jdbcType="VARCHAR" property="cTitle" />
+    <result column="c_new_http" jdbcType="VARCHAR" property="cNewHttp" />
+    <result column="c_channel" jdbcType="VARCHAR" property="cChannel" />
+    <result column="c_language" jdbcType="VARCHAR" property="cLanguage" />
+    <result column="c_menu_id" jdbcType="VARCHAR" property="cMenuId" />
+    <result column="c_type" jdbcType="VARCHAR" property="cType" />
+    <result column="t_time" jdbcType="TIMESTAMP" property="tTime" />
+    <result column="c_country" jdbcType="VARCHAR" property="cCountry" />
+    <result column="c_link_count" jdbcType="VARCHAR" property="cLinkCount" />
+    <result column="app_channel_url" jdbcType="VARCHAR" property="appChannelUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, c_article_id, c_user_id, c_title, c_new_http, c_channel, c_language, c_menu_id, 
+    c_type, t_time, c_country, c_link_count, app_channel_url
+  </sql>
+  <select id="selectByExample" parameterType="com.zcy.entity.AppDeHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from app_de_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.zcy.entity.AppDeHistoryExample">
+    delete from app_de_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zcy.entity.AppDeHistory">
+    insert into app_de_history (id, c_article_id, c_user_id, 
+      c_title, c_new_http, c_channel, 
+      c_language, c_menu_id, c_type, 
+      t_time, c_country, c_link_count, 
+      app_channel_url)
+    values (#{id,jdbcType=VARCHAR}, #{cArticleId,jdbcType=VARCHAR}, #{cUserId,jdbcType=VARCHAR}, 
+      #{cTitle,jdbcType=VARCHAR}, #{cNewHttp,jdbcType=VARCHAR}, #{cChannel,jdbcType=VARCHAR}, 
+      #{cLanguage,jdbcType=VARCHAR}, #{cMenuId,jdbcType=VARCHAR}, #{cType,jdbcType=VARCHAR}, 
+      #{tTime,jdbcType=TIMESTAMP}, #{cCountry,jdbcType=VARCHAR}, #{cLinkCount,jdbcType=VARCHAR}, 
+      #{appChannelUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zcy.entity.AppDeHistory">
+    insert into app_de_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cArticleId != null">
+        c_article_id,
+      </if>
+      <if test="cUserId != null">
+        c_user_id,
+      </if>
+      <if test="cTitle != null">
+        c_title,
+      </if>
+      <if test="cNewHttp != null">
+        c_new_http,
+      </if>
+      <if test="cChannel != null">
+        c_channel,
+      </if>
+      <if test="cLanguage != null">
+        c_language,
+      </if>
+      <if test="cMenuId != null">
+        c_menu_id,
+      </if>
+      <if test="cType != null">
+        c_type,
+      </if>
+      <if test="tTime != null">
+        t_time,
+      </if>
+      <if test="cCountry != null">
+        c_country,
+      </if>
+      <if test="cLinkCount != null">
+        c_link_count,
+      </if>
+      <if test="appChannelUrl != null">
+        app_channel_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cArticleId != null">
+        #{cArticleId,jdbcType=VARCHAR},
+      </if>
+      <if test="cUserId != null">
+        #{cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="cTitle != null">
+        #{cTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cNewHttp != null">
+        #{cNewHttp,jdbcType=VARCHAR},
+      </if>
+      <if test="cChannel != null">
+        #{cChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="cLanguage != null">
+        #{cLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="cMenuId != null">
+        #{cMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null">
+        #{cType,jdbcType=VARCHAR},
+      </if>
+      <if test="tTime != null">
+        #{tTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cCountry != null">
+        #{cCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="cLinkCount != null">
+        #{cLinkCount,jdbcType=VARCHAR},
+      </if>
+      <if test="appChannelUrl != null">
+        #{appChannelUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zcy.entity.AppDeHistoryExample" resultType="java.lang.Long">
+    select count(*) from app_de_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update app_de_history
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cArticleId != null">
+        c_article_id = #{record.cArticleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cUserId != null">
+        c_user_id = #{record.cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cTitle != null">
+        c_title = #{record.cTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cNewHttp != null">
+        c_new_http = #{record.cNewHttp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cChannel != null">
+        c_channel = #{record.cChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLanguage != null">
+        c_language = #{record.cLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cMenuId != null">
+        c_menu_id = #{record.cMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cType != null">
+        c_type = #{record.cType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tTime != null">
+        t_time = #{record.tTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cCountry != null">
+        c_country = #{record.cCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLinkCount != null">
+        c_link_count = #{record.cLinkCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appChannelUrl != null">
+        app_channel_url = #{record.appChannelUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update app_de_history
+    set id = #{record.id,jdbcType=VARCHAR},
+      c_article_id = #{record.cArticleId,jdbcType=VARCHAR},
+      c_user_id = #{record.cUserId,jdbcType=VARCHAR},
+      c_title = #{record.cTitle,jdbcType=VARCHAR},
+      c_new_http = #{record.cNewHttp,jdbcType=VARCHAR},
+      c_channel = #{record.cChannel,jdbcType=VARCHAR},
+      c_language = #{record.cLanguage,jdbcType=VARCHAR},
+      c_menu_id = #{record.cMenuId,jdbcType=VARCHAR},
+      c_type = #{record.cType,jdbcType=VARCHAR},
+      t_time = #{record.tTime,jdbcType=TIMESTAMP},
+      c_country = #{record.cCountry,jdbcType=VARCHAR},
+      c_link_count = #{record.cLinkCount,jdbcType=VARCHAR},
+      app_channel_url = #{record.appChannelUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.zcy.entity.AppDeHistory">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="c_article_id" jdbcType="VARCHAR" property="cArticleId" />
+    <result column="c_user_id" jdbcType="VARCHAR" property="cUserId" />
+    <result column="c_title" jdbcType="VARCHAR" property="cTitle" />
+    <result column="c_new_http" jdbcType="VARCHAR" property="cNewHttp" />
+    <result column="c_channel" jdbcType="VARCHAR" property="cChannel" />
+    <result column="c_language" jdbcType="VARCHAR" property="cLanguage" />
+    <result column="c_menu_id" jdbcType="VARCHAR" property="cMenuId" />
+    <result column="c_type" jdbcType="VARCHAR" property="cType" />
+    <result column="t_time" jdbcType="TIMESTAMP" property="tTime" />
+    <result column="c_country" jdbcType="VARCHAR" property="cCountry" />
+    <result column="c_link_count" jdbcType="VARCHAR" property="cLinkCount" />
+    <result column="app_channel_url" jdbcType="VARCHAR" property="appChannelUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, c_article_id, c_user_id, c_title, c_new_http, c_channel, c_language, c_menu_id, 
+    c_type, t_time, c_country, c_link_count, app_channel_url
+  </sql>
+  <select id="selectByExample" parameterType="com.zcy.entity.AppDeHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from app_de_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.zcy.entity.AppDeHistoryExample">
+    delete from app_de_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zcy.entity.AppDeHistory">
+    insert into app_de_history (id, c_article_id, c_user_id, 
+      c_title, c_new_http, c_channel, 
+      c_language, c_menu_id, c_type, 
+      t_time, c_country, c_link_count, 
+      app_channel_url)
+    values (#{id,jdbcType=VARCHAR}, #{cArticleId,jdbcType=VARCHAR}, #{cUserId,jdbcType=VARCHAR}, 
+      #{cTitle,jdbcType=VARCHAR}, #{cNewHttp,jdbcType=VARCHAR}, #{cChannel,jdbcType=VARCHAR}, 
+      #{cLanguage,jdbcType=VARCHAR}, #{cMenuId,jdbcType=VARCHAR}, #{cType,jdbcType=VARCHAR}, 
+      #{tTime,jdbcType=TIMESTAMP}, #{cCountry,jdbcType=VARCHAR}, #{cLinkCount,jdbcType=VARCHAR}, 
+      #{appChannelUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zcy.entity.AppDeHistory">
+    insert into app_de_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cArticleId != null">
+        c_article_id,
+      </if>
+      <if test="cUserId != null">
+        c_user_id,
+      </if>
+      <if test="cTitle != null">
+        c_title,
+      </if>
+      <if test="cNewHttp != null">
+        c_new_http,
+      </if>
+      <if test="cChannel != null">
+        c_channel,
+      </if>
+      <if test="cLanguage != null">
+        c_language,
+      </if>
+      <if test="cMenuId != null">
+        c_menu_id,
+      </if>
+      <if test="cType != null">
+        c_type,
+      </if>
+      <if test="tTime != null">
+        t_time,
+      </if>
+      <if test="cCountry != null">
+        c_country,
+      </if>
+      <if test="cLinkCount != null">
+        c_link_count,
+      </if>
+      <if test="appChannelUrl != null">
+        app_channel_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cArticleId != null">
+        #{cArticleId,jdbcType=VARCHAR},
+      </if>
+      <if test="cUserId != null">
+        #{cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="cTitle != null">
+        #{cTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cNewHttp != null">
+        #{cNewHttp,jdbcType=VARCHAR},
+      </if>
+      <if test="cChannel != null">
+        #{cChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="cLanguage != null">
+        #{cLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="cMenuId != null">
+        #{cMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null">
+        #{cType,jdbcType=VARCHAR},
+      </if>
+      <if test="tTime != null">
+        #{tTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cCountry != null">
+        #{cCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="cLinkCount != null">
+        #{cLinkCount,jdbcType=VARCHAR},
+      </if>
+      <if test="appChannelUrl != null">
+        #{appChannelUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zcy.entity.AppDeHistoryExample" resultType="java.lang.Long">
+    select count(*) from app_de_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update app_de_history
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cArticleId != null">
+        c_article_id = #{record.cArticleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cUserId != null">
+        c_user_id = #{record.cUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cTitle != null">
+        c_title = #{record.cTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cNewHttp != null">
+        c_new_http = #{record.cNewHttp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cChannel != null">
+        c_channel = #{record.cChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLanguage != null">
+        c_language = #{record.cLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cMenuId != null">
+        c_menu_id = #{record.cMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cType != null">
+        c_type = #{record.cType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tTime != null">
+        t_time = #{record.tTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cCountry != null">
+        c_country = #{record.cCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLinkCount != null">
+        c_link_count = #{record.cLinkCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appChannelUrl != null">
+        app_channel_url = #{record.appChannelUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update app_de_history
+    set id = #{record.id,jdbcType=VARCHAR},
+      c_article_id = #{record.cArticleId,jdbcType=VARCHAR},
+      c_user_id = #{record.cUserId,jdbcType=VARCHAR},
+      c_title = #{record.cTitle,jdbcType=VARCHAR},
+      c_new_http = #{record.cNewHttp,jdbcType=VARCHAR},
+      c_channel = #{record.cChannel,jdbcType=VARCHAR},
+      c_language = #{record.cLanguage,jdbcType=VARCHAR},
+      c_menu_id = #{record.cMenuId,jdbcType=VARCHAR},
+      c_type = #{record.cType,jdbcType=VARCHAR},
+      t_time = #{record.tTime,jdbcType=TIMESTAMP},
+      c_country = #{record.cCountry,jdbcType=VARCHAR},
+      c_link_count = #{record.cLinkCount,jdbcType=VARCHAR},
+      app_channel_url = #{record.appChannelUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
