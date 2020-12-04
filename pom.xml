@@ -11,15 +11,19 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
         <junit.version>4.12</junit.version>
         <lombok.version>1.18.10</lombok.version>
         <log4j.version>1.2.17</log4j.version>
         <mysql.version>8.0.17</mysql.version>
         <druid.version>1.1.16</druid.version>
         <mybatis.spring.boot.version>2.1.1</mybatis.spring.boot.version>
+
     </properties>
+
 
     <modules>
         <module>provider-random</module>
@@ -30,8 +34,13 @@
         <module>sentinel-service8401</module>
         <module>cloudalibaba-provider-payment9003</module>
         <module>cloudalibaba-provider-payment9004</module>
+        <module>cloud-api-dao</module>
         <module>cloud-api-commons</module>
-        <module>cloud-dao</module>
+        <module>cloud-api-dao</module>
+        <module>cloud-service-getway</module>
+        <module>cloud-service-email</module>
+        <module>cloud-service-provider-item8000</module>
+        <module>cloud-service-consumer-item9000</module>
     </modules>
     <!-- 子模块继承之后，提供作用：锁定版本 + 子module不用谢groupId和version -->
     <dependencyManagement>
