@@ -6,20 +6,27 @@ spring:
     time-zone: GMT+8
     default-property-inclusion: non_null
   cloud:
+    #使用nacos作为服务注册发现
     nacos:
       discovery:
         server-addr: 192.168.10.151:8848
+    #使用sentinel作为熔断器
     sentinel:
       transport:
         port: 8721
         dashboard: 192.168.10.151:8080
+    #设置与服务注册发现组件结合，这样可以采用服务名路由策略
     gateway:
       discovery:
         locator:
           enabled: true
+      #配置路由规则
       routes:
+          #采用自定义路由ID (有固定用法，不同的id有不同的功能)
         - id: MYSHOP-SERVICE-CONSUMER-ITEM
+          #采用 LoadBalanceClient方式请求，以lb://开头，后面接注册在nacos上的服务名
           uri: lb://myshop-service-consumer-item
+          #Predicate 翻译过来是谓词，主要是匹配用户的请求
           predicates:
             # 路径匹配，以 api 开头，直接配置是不生效的，看 filters 配置
             - Path=/api/item/**
